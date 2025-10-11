@@ -1,0 +1,211 @@
+:root {
+    --primary-color: #00a8ff;
+    --background-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --secondary-background: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    background-attachment: fixed;
+}
+
+.navbar {
+    background: transparent !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card {
+    background: var(--secondary-background);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
+}
+
+.list-group-item {
+    background: transparent;
+    border-color: var(--border-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item span {
+    flex: 1 1 auto;
+    margin-right: 15px;
+}
+
+.custom-duration-input {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item span {
+        margin-bottom: 10px;
+    }
+}
+
+#camera-view {
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1050;
+}
+
+#camera-video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#camera-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 20px;
+    z-index: 1060;
+}
+
+.control-btn, .record-btn {
+    background: var(--secondary-background);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover, .record-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.record-btn {
+    background-color: #ff4757;
+    border: none;
+}
+
+#record-btn.recording {
+    background-color: #b3303e;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+}
+
+.feedback-text, .effect-text {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+.effect-text {
+    top: 70px;
+    background-color: rgba(0, 168, 255, 0.8);
+}
+
+#effect-editor {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: var(--secondary-background);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border-color);
+    z-index: 1100;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+#effect-editor.open {
+    transform: translateX(0);
+}
+
+.effect-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.effect-editor-body {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.slider-container {
+    margin-bottom: 15px;
+}
+
+.slider-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.effect-editor-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+#preset-name-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    margin-bottom: 10px;
+}

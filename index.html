@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Cam</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ActionCam">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Action Cam</a>
+            <button id="install-btn" class="btn btn-primary" style="display: none;">Install</button>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <div id="shot-list-view" class="card bg-dark text-white p-3">
+            <h2 class="card-title">Your Shots</h2>
+            <div id="shot-list-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3"></div>
+        </div>
+
+        <div id="shot-detail-view" class="card bg-dark text-white p-3 mt-4" style="display: none;">
+            <h2 class="card-title">Shot Details</h2>
+            <!-- Content for shot details will go here -->
+        </div>
+    </main>
+
+    <!-- Camera view (full screen) -->
+    <div id="camera-view" style="display: none;">
+        <div class="camera-container">
+            <video id="camera-video" playsinline autoplay muted></video>
+            <canvas id="camera-canvas"></canvas>
+            <canvas id="recording-canvas" style="display: none;"></canvas>
+            <div id="feedback-overlay" class="feedback-text"></div>
+            <div id="effect-overlay" class="effect-text"></div>
+        </div>
+        <div id="camera-controls">
+            <button id="close-camera-btn" class="control-btn"><i class="fas fa-times"></i></button>
+            <button id="record-btn" class="record-btn"><i class="fas fa-circle"></i></button>
+            <button id="switch-camera-btn" class="control-btn"><i class="fas fa-sync-alt"></i></button>
+            <button id="edit-effect-btn" class="control-btn"><i class="fas fa-magic"></i></button>
+        </div>
+    </div>
+
+    <div id="effect-editor">
+        <div class="effect-editor-header">
+            <h3>Color Grading</h3>
+            <button id="close-editor-btn" class="control-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="effect-editor-body">
+            <div class="slider-container">
+                <label for="brightness-slider">Brightness</label>
+                <input type="range" id="brightness-slider" min="0" max="200" value="100">
+            </div>
+            <div class="slider-container">
+                <label for="contrast-slider">Contrast</label>
+                <input type="range" id="contrast-slider" min="0" max="200" value="100">
+            </div>
+            <div class="slider-container">
+                <label for="saturation-slider">Saturation</label>
+                <input type="range" id="saturation-slider" min="0" max="200" value="100">
+            </div>
+            <div class="slider-container">
+                <label for="sepia-slider">Sepia</label>
+                <input type="range" id="sepia-slider" min="0" max="100" value="0">
+            </div>
+            <div class="slider-container">
+                <label for="hue-slider">Hue</label>
+                <input type="range" id="hue-slider" min="0" max="360" value="0">
+            </div>
+        </div>
+        <div class="effect-editor-footer">
+            <input type="text" id="preset-name-input" placeholder="Preset Name">
+            <button id="save-preset-btn" class="btn btn-primary">Save Preset</button>
+        </div>
+    </div>
+    
+    <!-- TensorFlow.js CDNs -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

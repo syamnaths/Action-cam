@@ -1,0 +1,494 @@
+{
+  "shots": [
+    {
+      "id": "ss-ews",
+      "category": "Shot Size",
+      "name": "Extreme Wide Shot (EWS)",
+      "description": "Used to show the subject's surroundings. The subject is often barely visible. Often used as an establishing shot.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=nMU_BAZ_Qj8",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Frame a vast location.", "duration_seconds": 5},
+        {"step": "Place your subject in the frame so they are small.", "duration_seconds": 5},
+        {"step": "Record to establish the scene.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-ws",
+      "category": "Shot Size",
+      "name": "Wide Shot / Long Shot (WS/LS)",
+      "description": "Shows the entire subject from head to toe, with their surroundings still visible.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=VwbSxxm6skM&t=27s",
+      "solver_type": "POSE_DETECTION_FULL_BODY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Frame your subject from head to toe.", "duration_seconds": 5},
+        {"step": "Use the guides to ensure their whole body is in the shot.", "duration_seconds": 5},
+        {"step": "Record the subject's action.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-fs",
+      "category": "Shot Size",
+      "name": "Full Shot (FS)",
+      "description": "A shot that frames the entire body of the subject, from head to toe, with the framing being a bit tighter than a wide shot.",
+      "youtube_example_url": "https://youtube.com/shorts/qGAdb3t0WE0?si=x3BqZcU7IGvotTpO",
+      "solver_type": "POSE_DETECTION_FULL_BODY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Frame your subject from head to toe.", "duration_seconds": 5},
+        {"step": "Ensure their entire body is visible.", "duration_seconds": 5},
+        {"step": "Record the subject.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-mls",
+      "category": "Shot Size",
+      "name": "Medium Long Shot (MLS)",
+      "description": "Frames the subject from roughly the knees up. Also known as a 3/4 shot.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=JM9gc_8NqZ0",
+      "solver_type": "POSE_DETECTION_MEDIUM",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Frame your subject from the knees up.", "duration_seconds": 5},
+        {"step": "Use the guides to check framing.", "duration_seconds": 5},
+        {"step": "Record the subject.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-cs",
+      "category": "Shot Size",
+      "name": "Cowboy Shot",
+      "description": "A variation of a medium shot that frames the subject from mid-thighs up, so a cowboy's holsters would be visible.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=sNXK63Q632s",
+      "solver_type": "POSE_DETECTION_MEDIUM",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Frame your subject from the mid-thigh up.", "duration_seconds": 5},
+        {"step": "Imagine they are about to draw a pistol.", "duration_seconds": 5},
+        {"step": "Record the subject.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-ms",
+      "category": "Shot Size",
+      "name": "Medium Shot (MS)",
+      "description": "Shows the subject from the waist up. One of the most common shots.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=dQV2-6_0ZeY",
+      "solver_type": "POSE_DETECTION_MEDIUM",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Frame the subject from the waist up.", "duration_seconds": 5},
+        {"step": "Use guides to perfect framing.", "duration_seconds": 5},
+        {"step": "Record the conversation or action.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-mcu",
+      "category": "Shot Size",
+      "name": "Medium Close-Up (MCU)",
+      "description": "Frames a subject from the chest or shoulders up.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=bvHKhKwR96s",
+      "solver_type": "FACE_DETECTION_CLOSE_UP",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Frame the subject from the chest up.", "duration_seconds": 5},
+        {"step": "Focus on the subject's face and expression.", "duration_seconds": 5},
+        {"step": "Record the emotion.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-cu",
+      "category": "Shot Size",
+      "name": "Close-Up (CU)",
+      "description": "Fills the screen with the subject's face, showing detail and emotion.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=VfaZXlJso-s",
+      "solver_type": "FACE_DETECTION_CLOSE_UP",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Frame the subject's face.", "duration_seconds": 5},
+        {"step": "Use guides to frame the face correctly.", "duration_seconds": 5},
+        {"step": "Record the subtle expressions.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "ss-ecu",
+      "category": "Shot Size",
+      "name": "Extreme Close-Up (ECU)",
+      "description": "Frames a specific detail of the subject, such as their eyes or mouth.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=f0lb2MFJ5Rk",
+      "solver_type": "FACE_DETECTION_EXTREME_CLOSE_UP",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Choose a single facial feature.", "duration_seconds": 5},
+        {"step": "Frame only that feature.", "duration_seconds": 5},
+        {"step": "Record for dramatic effect.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sf-single",
+      "category": "Framing",
+      "name": "Single Shot",
+      "description": "A shot that features only one character.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=z9zXvH276Oc",
+      "solver_type": "POSE_DETECTION_MEDIUM",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Frame a single subject.", "duration_seconds": 5},
+        {"step": "Ensure no other characters are prominent.", "duration_seconds": 5},
+        {"step": "Record the subject.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sf-two",
+      "category": "Framing",
+      "name": "Two Shot",
+      "description": "A shot featuring two characters, often used for conversations.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=mn2Dcy-NDTw",
+      "solver_type": "FACE_DETECTION_TWO_FACES",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Frame two subjects in the shot.", "duration_seconds": 5},
+        {"step": "Use guides to ensure both faces are detected.", "duration_seconds": 5},
+        {"step": "Record the interaction.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sf-ots",
+      "category": "Framing",
+      "name": "Over the Shoulder Shot",
+      "description": "A shot of someone taken from the shoulder of another person.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=T4hfGzDtzXk",
+      "solver_type": "FACE_DETECTION_TWO_FACES",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Position camera behind one person's shoulder.", "duration_seconds": 5},
+        {"step": "Frame the other person.", "duration_seconds": 5},
+        {"step": "Record the conversation.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sf-oth",
+      "category": "Framing",
+      "name": "Over the Hip Shot",
+      "description": "A shot taken from behind a character's hip, often used in westerns. mostly similar to cowboy shot but sot from behind",
+      "youtube_example_url": "https://www.youtube.com/shorts/QdI5B0lqgSs",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Position camera near the character's hip.", "duration_seconds": 5},
+        {"step": "Frame the scene from this low perspective.", "duration_seconds": 5},
+        {"step": "Record the action.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sf-pov",
+      "category": "Framing",
+      "name": "Point of View Shot (POV)",
+      "description": "Shows what a character is looking at, as if from their eyes.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=BLCQAmTleP0",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Position the camera at the character's eye level.", "duration_seconds": 5},
+        {"step": "Imagine you are the character.", "duration_seconds": 5},
+        {"step": "Record the scene from their perspective.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sa-eye",
+      "category": "Angle",
+      "name": "Eye Level Shot",
+      "description": "The camera is placed at the subject's eye level, creating a neutral effect.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=1sc5_DiF7ew",
+      "solver_type": "POSE_DETECTION_MEDIUM",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Position camera at subject's eye level.", "duration_seconds": 5},
+        {"step": "Keep the camera level.", "duration_seconds": 5},
+        {"step": "Record for a neutral, natural feel.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sa-low",
+      "category": "Angle",
+      "name": "Low Angle Shot",
+      "description": "The camera is placed low, looking up, making the subject look powerful.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=HnZsFS8I4bQ",
+      "solver_type": "POSE_DETECTION_MEDIUM",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Position camera below subject's eye level.", "duration_seconds": 5},
+        {"step": "Tilt the camera upwards.", "duration_seconds": 5},
+        {"step": "Record to create a sense of power.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sa-high",
+      "category": "Angle",
+      "name": "High Angle Shot",
+      "description": "The camera is placed high, looking down, making the subject look vulnerable.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=b-nqxw9mvn8",
+      "solver_type": "POSE_DETECTION_MEDIUM",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Position camera above subject's eye level.", "duration_seconds": 5},
+        {"step": "Tilt the camera downwards.", "duration_seconds": 5},
+        {"step": "Record to create a sense of vulnerability.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sa-dutch",
+      "category": "Angle",
+      "name": "Dutch Angle / Dutch Tilt",
+      "description": "The camera is tilted on its axis, creating a sense of unease or disorientation.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=R9FUEScjB1U",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Frame your subject.", "duration_seconds": 5},
+        {"step": "Tilt the camera 15-30 degrees.", "duration_seconds": 5},
+        {"step": "Record to create a feeling of unease.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sa-overhead",
+      "category": "Angle",
+      "name": "Bird's Eye View / Overhead",
+      "description": "A shot looking directly down on a scene from above.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=wSAZfwxI_tI",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Position the camera directly overhead.", "duration_seconds": 5},
+        {"step": "Ensure the camera is pointing straight down.", "duration_seconds": 5},
+        {"step": "Record to provide a unique overview of the scene.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sa-aerial",
+      "category": "Angle",
+      "name": "Aerial Shot",
+      "description": "A shot taken from the air, typically from a helicopter or drone.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=s3oo3p0h8hw",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Use a drone for this shot.", "duration_seconds": 5},
+        {"step": "Fly the drone to a high altitude.", "duration_seconds": 5},
+        {"step": "Record an establishing or travel shot.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-pan",
+      "category": "Movement",
+      "name": "Pan Shot",
+      "description": "The camera moves horizontally from a fixed position.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=MIzAfXcCX3c",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Fix your camera's position on a tripod.", "duration_seconds": 5},
+        {"step": "Rotate the camera smoothly left or right.", "duration_seconds": 5},
+        {"step": "Record to reveal a scene or follow a subject.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-tilt",
+      "category": "Movement",
+      "name": "Tilt Shot",
+      "description": "The camera moves vertically from a fixed position.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=wG49Htk6D7s",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Fix your camera's position on a tripod.", "duration_seconds": 5},
+        {"step": "Rotate the camera smoothly up or down.", "duration_seconds": 5},
+        {"step": "Record to reveal an object or character.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-dolly",
+      "category": "Movement",
+      "name": "Dolly Shot",
+      "description": "The entire camera moves forward or backward, often on a track.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=p4qbA5vCHKc",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Mount camera on a wheeled device (dolly, slider).", "duration_seconds": 5},
+        {"step": "Move the camera smoothly towards or away from the subject.", "duration_seconds": 5},
+        {"step": "Record to create a sense of movement and depth.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-zoom",
+      "category": "Movement",
+      "name": "Zoom Shot",
+      "description": "The camera lens is used to zoom in or out, changing the focal length.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=RdOGBQV-k5I",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Frame your subject.", "duration_seconds": 5},
+        {"step": "Use the zoom controls to smoothly zoom in or out.", "duration_seconds": 5},
+        {"step": "Record to focus attention on a detail.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-dollyzoom",
+      "category": "Movement",
+      "name": "Dolly Zoom / Vertigo Shot",
+      "description": "The camera dollies in or out while the lens zooms in the opposite direction.",
+      "youtube_example_url": "https://www.youtube.com/shorts/uzTmBWUetfc",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "This is a very advanced shot!", "duration_seconds": 5},
+        {"step": "Dolly the camera towards the subject while zooming out.", "duration_seconds": 5},
+        {"step": "Record to create a sense of unease or revelation.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-track",
+      "category": "Movement",
+      "name": "Tracking Shot",
+      "description": "The camera moves alongside the subject.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=mkVYpzyJvG8",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Move the camera parallel to your subject's movement.", "duration_seconds": 5},
+        {"step": "Keep the subject in the same part of the frame.", "duration_seconds": 5},
+        {"step": "Record to follow the action.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-arc",
+      "category": "Movement",
+      "name": "Arc Shot",
+      "description": "The camera moves in a circular path around the subject.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=Hby08EPZV1c",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Move the camera in a semi-circle around your subject.", "duration_seconds": 5},
+        {"step": "Keep the subject in the center of the frame.", "duration_seconds": 5},
+        {"step": "Record to add dynamism to the scene.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sft-rack",
+      "category": "Focus",
+      "name": "Rack Focus / Focus Pull",
+      "description": "Changing the focus of the lens from one subject to another during a shot.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=I-N_7QXA6xE",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Set your focus on one subject.", "duration_seconds": 5},
+        {"step": "Smoothly shift the focus to another subject.", "duration_seconds": 5},
+        {"step": "Record to shift the audience's attention.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sft-shallow",
+      "category": "Focus",
+      "name": "Shallow Focus",
+      "description": "One part of the image is in focus while the rest is out of focus (blurry).",
+      "youtube_example_url": "https://www.youtube.com/watch?v=Iq2GjONASzE",
+      "solver_type": "GUIDE_ONLY",
+      "effect": "golden_earthy",
+      "guidance_steps": [
+        {"step": "Use a wide aperture (low f-stop number).", "duration_seconds": 5},
+        {"step": "Focus precisely on your subject.", "duration_seconds": 5},
+        {"step": "Record to isolate your subject from the background.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sft-deep",
+      "category": "Focus",
+      "name": "Deep Focus",
+      "description": "Everything in the frame, from foreground to background, is in sharp focus.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=6ZsaGDqlo5w",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Use a narrow aperture (high f-stop number).", "duration_seconds": 5},
+        {"step": "Ensure you have plenty of light.", "duration_seconds": 5},
+        {"step": "Record to show all the detail in the scene.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sft-tiltshift",
+      "category": "Focus",
+      "name": "Tilt-Shift",
+      "description": "Rotates the lens plane relative to the image plane, creating a very narrow band of focus.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=zfskvjrpaqs",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Requires a special tilt-shift lens.", "duration_seconds": 5},
+        {"step": "Adjust the tilt to select a plane of focus.", "duration_seconds": 5},
+        {"step": "Record to create a miniaturized look.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-handheld",
+      "category": "Technique",
+      "name": "Handheld Shot",
+      "description": "The camera is held by the operator, resulting in a shaky, kinetic feel.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=5JTlWtZQV1A",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Hold the camera firmly.", "duration_seconds": 5},
+        {"step": "Allow for some natural movement and shake.", "duration_seconds": 5},
+        {"step": "Record to create a sense of urgency or realism.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-steadicam",
+      "category": "Technique",
+      "name": "Steadicam Shot",
+      "description": "Using a camera stabilizer to create smooth, floating camera movements.",
+      "youtube_example_url": "https://www.youtube.com/watch?v=C7_oWLpyQpE",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Requires a Steadicam or similar gimbal rig.", "duration_seconds": 5},
+        {"step": "Balance the camera on the rig.", "duration_seconds": 5},
+        {"step": "Walk smoothly to create a floating effect.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-crane",
+      "category": "Technique",
+      "name": "Crane or Jib Shot",
+      "description": "The camera is mounted on a crane or jib to move vertically through space.",
+      "youtube_example_url": "https://www.youtube.com/shorts/Bj2oNXJ3Bds",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Mount the camera on a crane or jib.", "duration_seconds": 5},
+        {"step": "Move the arm of the crane up or down.", "duration_seconds": 5},
+        {"step": "Record to create dramatic reveals or high-angle shots.", "duration_seconds": 10}
+      ]
+    },
+    {
+      "id": "sm-drone",
+      "category": "Technique",
+      "name": "Drone Shot",
+      "description": "A shot taken from a camera mounted on a drone, essentially a modern aerial shot.",
+      "youtube_example_url": "http://youtube.com/shorts/weipQCbYbGY",
+      "solver_type": "GUIDE_ONLY",
+      "effect": null,
+      "guidance_steps": [
+        {"step": "Use a camera drone.", "duration_seconds": 5},
+        {"step": "Fly the drone to capture sweeping vistas or follow action.", "duration_seconds": 5},
+        {"step": "Record for breathtaking aerial perspectives.", "duration_seconds": 10}
+      ]
+    }
+  ]
+}
