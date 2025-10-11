@@ -278,6 +278,13 @@ async function startCamera(shotId) {
         videoStream = await navigator.mediaDevices.getUserMedia(constraints);
         const video = document.getElementById('camera-video');
         video.srcObject = videoStream;
+
+        if (currentFacingMode === 'user') {
+            video.classList.add('mirrored');
+        } else {
+            video.classList.remove('mirrored');
+        }
+
         if (document.getElementById('smooth-transition-checkbox').checked) {
             video.classList.add('smooth-transition');
         }
@@ -296,6 +303,10 @@ async function startCamera(shotId) {
                 recordingCanvas.width = video.videoWidth;
                 recordingCanvas.height = video.videoHeight;
                 recordingCtx.filter = getComputedStyle(video).filter;
+                if (currentFacingMode === 'user') {
+                    recordingCtx.translate(video.videoWidth, 0);
+                    recordingCtx.scale(-1, 1);
+                }
                 recordingCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
                 requestAnimationFrame(renderLoop);
             };
@@ -311,6 +322,7 @@ function stopCamera() {
     if (guidanceIntervalId) clearInterval(guidanceIntervalId);
     if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
     const video = document.getElementById('camera-video');
+    video.classList.remove('mirrored');
     applyEffect(video, null);
     videoStream = null; tfModel = null; solverFrameId = null; guidanceIntervalId = null;
     renderShotDetail(currentShot.id); // Re-render detail view to restore original plan
