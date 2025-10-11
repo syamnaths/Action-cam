@@ -61,10 +61,20 @@
 
     <div id="effect-editor">
         <div class="effect-editor-header">
-            <h3>Color Grading</h3>
+            <h3>Settings</h3>
             <button id="close-editor-btn" class="control-btn"><i class="fas fa-times"></i></button>
         </div>
         <div class="effect-editor-body">
+            <div class="mb-3">
+                <label for="aspect-ratio-select" class="form-label">Aspect Ratio</label>
+                <select class="form-select" id="aspect-ratio-select">
+                    <option value="1.77">16:9 (Widescreen)</option>
+                    <option value="1.33">4:3 (Classic TV)</option>
+                    <option value="1.85">1.85:1 (Cinematic)</option>
+                    <option value="2.39">2.39:1 (Anamorphic)</option>
+                </select>
+            </div>
+            <hr>
             <div class="slider-container">
                 <label for="brightness-slider">Brightness</label>
                 <input type="range" id="brightness-slider" min="0" max="200" value="100">

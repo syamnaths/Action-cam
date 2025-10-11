@@ -1,7 +1,7 @@
 {
   "name": "Action Cam",
   "short_name": "ActionCam",
-  "description": "A simple action camera web application",
+  "description": "A  simple action camera web application",
   "start_url": "/Action-cam/index.html",
   "display": "fullscreen",
   "background_color": "#1a1a1a",

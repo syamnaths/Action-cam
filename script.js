@@ -126,6 +126,8 @@ function setupInstallButton() {
     }
 }
 
+let currentAspectRatio = 1.77; // Default to 16:9
+
 function setupEventListeners() {
     setupInstallButton();
     document.getElementById('quick-record-btn').addEventListener('click', () => {
@@ -150,6 +152,11 @@ function setupEventListeners() {
     });
     document.getElementById('save-preset-btn').addEventListener('click', saveCurrentEffectAsPreset);
 
+    document.getElementById('aspect-ratio-select').addEventListener('change', (e) => {
+        currentAspectRatio = parseFloat(e.target.value);
+        updateAspectRatio();
+    });
+
     document.getElementById('smooth-transition-checkbox').addEventListener('change', (e) => {
         document.getElementById('camera-video').classList.toggle('smooth-transition', e.target.checked);
     });
@@ -157,6 +164,20 @@ function setupEventListeners() {
     ['brightness', 'contrast', 'saturation', 'sepia', 'hue'].forEach(filter => {
         document.getElementById(`${filter}-slider`).addEventListener('input', updateLiveEffect);
     });
+}
+
+function updateAspectRatio() {
+    const video = document.getElementById('camera-video');
+    const videoContainer = document.getElementById('camera-view');
+    const containerAspectRatio = videoContainer.offsetWidth / videoContainer.offsetHeight;
+
+    if (containerAspectRatio > currentAspectRatio) {
+        video.style.width = `${videoContainer.offsetHeight * currentAspectRatio}px`;
+        video.style.height = '100%';
+    } else {
+        video.style.width = '100%';
+        video.style.height = `${videoContainer.offsetWidth / currentAspectRatio}px`;
+    }
 }
 
 function updateLiveEffect() {
@@ -306,21 +327,51 @@ async function startCamera(shotId) {
                 runSolver();
             });
 
-            const recordingCanvas = document.getElementById('recording-canvas');
-            const recordingCtx = recordingCanvas.getContext('2d');
-            let renderLoop = () => {
-                if (video.paused || video.ended) return;
-                recordingCanvas.width = video.videoWidth;
-                recordingCanvas.height = video.videoHeight;
-                recordingCtx.filter = getComputedStyle(video).filter;
-                if (currentFacingMode === 'user') {
-                    recordingCtx.translate(video.videoWidth, 0);
-                    recordingCtx.scale(-1, 1);
-                }
-                recordingCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-                requestAnimationFrame(renderLoop);
-            };
-            renderLoop();
+                    const recordingCanvas = document.getElementById('recording-canvas');
+                    const recordingCtx = recordingCanvas.getContext('2d');
+                    let renderLoop = () => {
+                        if (video.paused || video.ended) return;
+            
+                        const videoWidth = video.videoWidth;
+                        const videoHeight = video.videoHeight;
+                        const canvasWidth = videoWidth;
+                        const canvasHeight = videoHeight;
+            
+                        recordingCanvas.width = canvasWidth;
+                        recordingCanvas.height = canvasHeight;
+            
+                        recordingCtx.fillStyle = 'black';
+                        recordingCtx.fillRect(0, 0, canvasWidth, canvasHeight);
+            
+                        const targetAspectRatio = currentAspectRatio;
+                        const videoAspectRatio = videoWidth / videoHeight;
+            
+                        let drawWidth = canvasWidth;
+                        let drawHeight = canvasHeight;
+                        let x = 0;
+                        let y = 0;
+            
+                        if (videoAspectRatio > targetAspectRatio) {
+                            drawHeight = canvasWidth / videoAspectRatio;
+                            y = (canvasHeight - drawHeight) / 2;
+                        } else {
+                            drawWidth = canvasHeight * videoAspectRatio;
+                            x = (canvasWidth - drawWidth) / 2;
+                        }
+            
+                        recordingCtx.filter = getComputedStyle(video).filter;
+                        if (currentFacingMode === 'user') {
+                            recordingCtx.translate(canvasWidth, 0);
+                            recordingCtx.scale(-1, 1);
+                            recordingCtx.drawImage(video, x, y, drawWidth, drawHeight);
+                            recordingCtx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+                        } else {
+                            recordingCtx.drawImage(video, x, y, drawWidth, drawHeight);
+                        }
+            
+                        requestAnimationFrame(renderLoop);
+                    };
+                    renderLoop();            renderLoop();
         };
     } catch (err) { console.error(err); alert('Could not access camera.'); }
 }

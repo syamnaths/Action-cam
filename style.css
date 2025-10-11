@@ -66,6 +66,19 @@ body {
     flex-shrink: 0;
 }
 
+.form-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.form-select:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+    box-shadow: none;
+}
+
 @media (max-width: 768px) {
     .list-group-item {
         flex-direction: column;
