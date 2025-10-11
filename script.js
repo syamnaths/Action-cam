@@ -128,6 +128,16 @@ function setupInstallButton() {
 
 function setupEventListeners() {
     setupInstallButton();
+    document.getElementById('quick-record-btn').addEventListener('click', () => {
+        currentShot = {
+            id: 'quick-record',
+            name: 'Quick Record',
+            description: 'A quick recording with no guidance.',
+            guidance_steps: [],
+            effect: null
+        };
+        startCamera(currentShot.id);
+    });
     document.getElementById('close-camera-btn').addEventListener('click', () => { stopCamera(); showView('shot-detail-view'); });
     document.getElementById('switch-camera-btn').addEventListener('click', () => { currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user'; stopCamera(); startCamera(currentShot.id); });
     document.getElementById('record-btn').addEventListener('click', toggleRecording);

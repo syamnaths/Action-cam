@@ -33,6 +33,20 @@ body {
     border-color: var(--primary-color);
 }
 
+#quick-record-btn {
+    background-color: white;
+    color: #343a40;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#quick-record-btn .fa-video {
+    color: red;
+}
+
 .list-group-item {
     background: transparent;
     border-color: var(--border-color);
