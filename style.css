@@ -61,6 +61,10 @@ body {
     .list-group-item span {
         margin-bottom: 10px;
     }
+
+    #camera-controls {
+        bottom: 30px;
+    }
 }
 
 #camera-view {
