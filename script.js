@@ -140,6 +140,10 @@ function setupEventListeners() {
     });
     document.getElementById('save-preset-btn').addEventListener('click', saveCurrentEffectAsPreset);
 
+    document.getElementById('smooth-transition-checkbox').addEventListener('change', (e) => {
+        document.getElementById('camera-video').classList.toggle('smooth-transition', e.target.checked);
+    });
+
     ['brightness', 'contrast', 'saturation', 'sepia', 'hue'].forEach(filter => {
         document.getElementById(`${filter}-slider`).addEventListener('input', updateLiveEffect);
     });
@@ -151,6 +155,12 @@ function updateLiveEffect() {
     const saturation = document.getElementById('saturation-slider').value;
     const sepia = document.getElementById('sepia-slider').value;
     const hue = document.getElementById('hue-slider').value;
+
+    document.getElementById('brightness-value').innerText = `${brightness}%`;
+    document.getElementById('contrast-value').innerText = `${contrast}%`;
+    document.getElementById('saturation-value').innerText = `${saturation}%`;
+    document.getElementById('sepia-value').innerText = `${sepia}%`;
+    document.getElementById('hue-value').innerText = `${hue}deg`;
 
     const filterValue = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) sepia(${sepia}%) hue-rotate(${hue}deg)`;
     
@@ -223,13 +233,17 @@ function renderShotDetail(shotId) {
     
     const guidanceStepsHtml = currentShot.guidance_steps.map((step, index) => `
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span id="step-text-${index}">${step.start_time_seconds}s: ${step.step}</span>
+            <span id="step-text-${index}" contenteditable="true" oninput="updateShotStep(${index}, this.innerText)">${step.start_time_seconds}s: ${step.step}</span>
             <input type="number" class="form-control custom-duration-input" value="${step.duration_seconds}" data-step-index="${index}" onchange="updateShotPlan()">
         </li>`).join('');
 
     container.innerHTML = `<h2>${currentShot.name}</h2><p>${currentShot.description}</p><div class="ratio ratio-16x9 mb-4"><iframe src="${youtubeEmbedUrl}" allowfullscreen></iframe></div><h4>Shot Plan</h4><ul class="list-group mb-4">${guidanceStepsHtml}</ul><div class="d-grid gap-2"><button class="btn btn-primary btn-lg" onclick="startCamera('${currentShot.id}')">Record</button><button class="btn btn-outline-secondary" onclick="showView('shot-list-view')">Back to List</button></div>`;
     updateShotPlan(); // Initialize start times
     showView('shot-detail-view');
+}
+
+function updateShotStep(index, newText) {
+    currentShot.guidance_steps[index].step = newText.split(': ')[1];
 }
 
 function updateShotPlan() {
@@ -241,8 +255,8 @@ function updateShotPlan() {
         step.start_time_seconds = cumulativeTime;
         step.duration_seconds = newDuration;
 
-        const stepText = document.getElementById(`step-text-${index}`);
-        stepText.innerHTML = `${step.start_time_seconds}s: ${step.step}`;
+        const stepTextElement = document.getElementById(`step-text-${index}`);
+        stepTextElement.innerHTML = `${step.start_time_seconds}s: ${step.step}`;
 
         cumulativeTime += newDuration;
     });
@@ -251,12 +265,22 @@ function updateShotPlan() {
 // --- CAMERA & SOLVER ---
 async function startCamera(shotId) {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { alert('Camera not supported.'); return; }
-    if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {});
-    const constraints = { video: { facingMode: currentFacingMode } };
+    if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(()=>{});
+    const constraints = {
+        video: {
+            facingMode: currentFacingMode,
+            width: { ideal: 4096 },
+            height: { ideal: 2160 }
+        },
+        audio: true
+    };
     try {
         videoStream = await navigator.mediaDevices.getUserMedia(constraints);
         const video = document.getElementById('camera-video');
         video.srcObject = videoStream;
+        if (document.getElementById('smooth-transition-checkbox').checked) {
+            video.classList.add('smooth-transition');
+        }
         video.onloadedmetadata = () => {
             applyEffect(video, currentShot.effect);
             video.play();
@@ -337,7 +361,7 @@ async function runSolver() {
     solverFrameId = requestAnimationFrame(runSolver);
 }
 
-function toggleRecording() {
+async function toggleRecording() {
     console.log(`[${new Date().toISOString()}] toggleRecording called. isRecording: ${isRecording}`);
     const recordBtn = document.getElementById('record-btn');
     const icon = recordBtn.querySelector('i');
@@ -356,19 +380,32 @@ function toggleRecording() {
         stopGuidance();
     } else {
         console.log('Attempting to start recording...');
-        const recordingCanvas = document.getElementById('recording-canvas');
-        const canvasStream = recordingCanvas.captureStream();
-
-        if (!canvasStream) {
-            alert('Could not capture canvas stream!');
-            console.error('canvasStream is not available.');
-            return;
-        }
-
-        recordedChunks = [];
-        const options = { mimeType: 'video/webm; codecs=vp9' };
-
+        
         try {
+            const fileHandle = await window.showSaveFilePicker({
+                suggestedName: `${currentShot.name.replace(/\s+/g, '_')}_${new Date().toISOString()}.webm`,
+                types: [{
+                    description: 'WebM Video File',
+                    accept: { 'video/webm': ['.webm'] },
+                }],
+            });
+
+            const writable = await fileHandle.createWritable();
+
+            const recordingCanvas = document.getElementById('recording-canvas');
+            const canvasStream = recordingCanvas.captureStream();
+
+            if (!canvasStream) {
+                alert('Could not capture canvas stream!');
+                console.error('canvasStream is not available.');
+                return;
+            }
+
+            const options = { 
+                mimeType: 'video/webm; codecs=vp9',
+                videoBitsPerSecond: 25000000 // 25 Mbps
+            };
+
             mediaRecorder = new MediaRecorder(canvasStream, options);
             console.log(`MediaRecorder created. State: ${mediaRecorder.state}`);
 
@@ -381,27 +418,15 @@ function toggleRecording() {
                 startGuidance();
             };
 
-            mediaRecorder.ondataavailable = event => {
+            mediaRecorder.ondataavailable = async (event) => {
                 if (event.data.size > 0) {
-                    console.log('Data available, pushing chunk.');
-                    recordedChunks.push(event.data);
+                    await writable.write(event.data);
                 }
             };
 
-            mediaRecorder.onstop = () => {
+            mediaRecorder.onstop = async () => {
                 console.log(`Recording stopped. State: ${mediaRecorder.state}`);
-                const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = `${currentShot.name.replace(/\s+/g, '_')}_${new Date().toISOString()}.webm`;
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => {
-                    document.body.removeChild(a);
-                    window.URL.revokeObjectURL(url);
-                }, 100);
+                await writable.close();
             };
 
             mediaRecorder.onerror = (event) => {
@@ -412,9 +437,12 @@ function toggleRecording() {
             console.log(`mediaRecorder.start() called. State is now: ${mediaRecorder.state}`);
 
         } catch (e) {
-            console.error('Exception while creating MediaRecorder:', e);
-            alert(`Error creating MediaRecorder: ${e}. Try a different codec.`);
-            return;
+            if (e.name === 'AbortError') {
+                console.log('File save picker aborted.');
+            } else {
+                console.error('Exception while setting up recording:', e);
+                alert(`Error setting up recording: ${e}.`);
+            }
         }
     }
 }
@@ -422,24 +450,18 @@ function toggleRecording() {
 function startGuidance() {
     if (!currentShot || !currentShot.guidance_steps) return;
     let stepIndex = 0;
-    let timeIntoShot = 0;
 
     function nextStep() {
         if (stepIndex >= currentShot.guidance_steps.length) {
             if (isRecording) toggleRecording(); // Auto-stop recording
             return;
         }
-        const step = currentShot.guidance_steps[stepIndex];
-        document.getElementById('feedback-overlay').innerText = step.step;
+        const stepText = currentShot.guidance_steps[stepIndex].step;
+        document.getElementById('feedback-overlay').innerText = stepText;
         
-        const nextStepTime = (stepIndex + 1 < currentShot.guidance_steps.length) 
-            ? currentShot.guidance_steps[stepIndex + 1].start_time_seconds 
-            : timeIntoShot + step.duration_seconds;
-        
-        const duration = (nextStepTime - timeIntoShot) * 1000;
+        const duration = currentShot.guidance_steps[stepIndex].duration_seconds * 1000;
 
         stepIndex++;
-        timeIntoShot = nextStepTime;
         
         if (duration > 0) {
             guidanceIntervalId = setTimeout(nextStep, duration);

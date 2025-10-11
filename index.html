@@ -62,25 +62,36 @@
             <div class="slider-container">
                 <label for="brightness-slider">Brightness</label>
                 <input type="range" id="brightness-slider" min="0" max="200" value="100">
+                <span id="brightness-value">100%</span>
             </div>
             <div class="slider-container">
                 <label for="contrast-slider">Contrast</label>
                 <input type="range" id="contrast-slider" min="0" max="200" value="100">
+                <span id="contrast-value">100%</span>
             </div>
             <div class="slider-container">
                 <label for="saturation-slider">Saturation</label>
                 <input type="range" id="saturation-slider" min="0" max="200" value="100">
+                <span id="saturation-value">100%</span>
             </div>
             <div class="slider-container">
                 <label for="sepia-slider">Sepia</label>
                 <input type="range" id="sepia-slider" min="0" max="100" value="0">
+                <span id="sepia-value">0%</span>
             </div>
             <div class="slider-container">
                 <label for="hue-slider">Hue</label>
                 <input type="range" id="hue-slider" min="0" max="360" value="0">
+                <span id="hue-value">0deg</span>
             </div>
         </div>
         <div class="effect-editor-footer">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="smooth-transition-checkbox" checked>
+                <label class="form-check-label" for="smooth-transition-checkbox">
+                    Smooth Transition
+                </label>
+            </div>
             <input type="text" id="preset-name-input" placeholder="Preset Name">
             <button id="save-preset-btn" class="btn btn-primary">Save Preset</button>
         </div>

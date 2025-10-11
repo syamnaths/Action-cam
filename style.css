@@ -79,6 +79,14 @@ body {
     height: 100%;
 }
 
+#camera-video.mirrored {
+    transform: scaleX(-1);
+}
+
+#camera-video.smooth-transition {
+    transition: filter 1s ease;
+}
+
 #camera-controls {
     position: absolute;
     bottom: 20px;
@@ -189,6 +197,10 @@ body {
 .slider-container label {
     display: block;
     margin-bottom: 5px;
+}
+
+.slider-container span {
+    float: right;
 }
 
 input[type="range"] {
